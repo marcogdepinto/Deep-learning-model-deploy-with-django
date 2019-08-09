@@ -46,6 +46,8 @@ The model is stored in the ```models``` folder.
 
 The ```templates``` folder will contain a Bootstrap simple UI to interact with the API (work in progress).
 
+If you do not know how Django works, you can skip to the ``App/views.py`` file to review the high level logic of the API.
+
 **How to start the server and try it**
 
 1) Install Django and the Django-Rest framework.
