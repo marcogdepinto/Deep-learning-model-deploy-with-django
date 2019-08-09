@@ -64,7 +64,7 @@ class Predict(views.APIView):
 
         This method is used to convert the predictions (int) into human readable strings.
         ::pred:: An int from 0 to 7.
-        ::output:: A labels
+        ::output:: A string label
 
         Example:
 
