@@ -53,4 +53,9 @@ If you do not know how Django works, you can skip to the ``App/views.py`` file t
 1) Install Django and the Django-Rest framework.
 2) ```git clone https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API.git```
 3) Open a terminal window, ```cd``` into the project folder and run ```python manage.py runserver```.
- 
+
+**Interface (WIP)**
+
+There will be a simple frontend to upload the files and make queries to the API. This is still work in progress. Actual mockup below:
+
+ ![Picture2](https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/blob/master/gitmedia/interface.png)
