@@ -1,17 +1,16 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
   <title>Marco Giuseppe de Pinto | Website</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  {% load static %}
-  <link rel="stylesheet" type="text/css" href="{% static 'App/static/css/styles.css' %}" />
-  <link rel="stylesheet" type="text/javascript" href="{% static 'App/static/javascript/javascript.js' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+  <script type="text/javascript" src="{% static 'javascript/javascript.js' %}"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
     <body style="background-color:white">
         <div class="jumbotron text-center" id="myJumbotron" style="background-color:white">
@@ -21,10 +20,10 @@
         <div class="container" id="Container1">
           <div class="row">
             <div class="col-sm-2" id="FileUpload">
-                <button onclick="saveFile()">Upload your file</button>
+                <button onclick="loadFile()">Upload your file</button>
             </div>
-            <div class="col-sm-5" id="MakePredictions">
-              <button onclick="MakePredictions()">Make your prediction</button>
+            <div class="col-sm-5" id="makePredictions">
+              <button onclick="makePredictions()">Make your prediction</button>
             </div>
               <div class="col-sm-5" id="PredictionsOutput">
               <p>The emotion predicted for your file is: </p>
