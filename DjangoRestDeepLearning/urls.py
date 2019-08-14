@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf.urls import url, include
+from django.conf import settings
+from django.urls import path
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -22,3 +24,13 @@ urlpatterns = [
     url(r'^file/', include('App.urls'), name="File"),
     url(r'^predict/', include('App.urls'), name="Predict"),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls)),
+
+        # For django versions before 2.0:
+        # url(r'^__debug__/', include(debug_toolbar.urls)),
+
+    ] + urlpatterns
