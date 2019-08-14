@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% block content %}
 <html lang="en">
 <head>
   <title>Emotion Classification Ravdess | Django Deep Learning API</title>
@@ -20,7 +21,7 @@
         <div class="container" id="Container1">
           <div class="row">
             <div class="col-sm-4" id="FileUpload">
-              <form action="127.0.0.1:8000/file/upload/" method="post" enctype="multipart/form-data">
+              <form action="/file/upload/" method="post" enctype="multipart/form-data">
                   {{ form }}
                  <input id="audio_file" type="file" accept="audio/*"/>
                  <input type="submit" value="Upload File" name="submit"/>
@@ -35,4 +36,5 @@
           </div>
         </div>
     </body>
+{% endblock %}
 </html>
