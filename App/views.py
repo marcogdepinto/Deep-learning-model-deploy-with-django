@@ -10,7 +10,6 @@ from django.conf import settings
 from rest_framework import status
 from django.shortcuts import render
 from App.serialize import FileSerializer
-from .functions import handle_uploaded_file
 from django.http import HttpResponseRedirect
 from rest_framework.response import Response
 from django.views.generic import TemplateView
@@ -30,9 +29,8 @@ class IndexView(TemplateView):
             form = FileForm(request.POST, request.FILES)
             # check whether it's valid:
             if form.is_valid():
-                handle_uploaded_file(request.FILES['file'])
                 form.save()
-                # redirect to a new URL:
+                # redirect to the same URL:
                 return HttpResponseRedirect('/App/index/')
         # if a GET (or any other method) we'll create a blank form
         else:

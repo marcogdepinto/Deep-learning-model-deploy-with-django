@@ -23,7 +23,7 @@
             <div class="col-sm-4" id="FileUpload">
               <form action="/file/upload/" method="post" enctype="multipart/form-data">
                  {% csrf_token %}
-                 {{ form }}
+                 {{ form.as_p }}
                  <input id="audio_file" type="file"/>
                  <input type="submit" value="Upload File" name="submit"/>
               </form>
