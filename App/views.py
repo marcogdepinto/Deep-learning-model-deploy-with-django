@@ -1,42 +1,43 @@
 import os
 import keras
 import librosa
+import logging
 import numpy as np
 import tensorflow as tf
-from django.conf import settings
+from .forms import FileForm
 from rest_framework import views
+from django.conf import settings
+from rest_framework import status
+from django.shortcuts import render
+from App.serialize import FileSerializer
+from .functions import handle_uploaded_file
+from django.http import HttpResponseRedirect
+from rest_framework.response import Response
 from django.views.generic import TemplateView
 from rest_framework.parsers import MultiPartParser, FormParser
-from rest_framework.response import Response
-from rest_framework import status
-from App.serialize import FileSerializer
-from .forms import FileForm
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
 
 
 class IndexView(TemplateView):
-    template_name = "index.html"  # TODO: complete template
+    template_name = "index.html"
+    log = logging.getLogger(__name__)
+    log.debug("Debug testing")
 
-    def get_file(self, request): # TODO: fix, still rendering blank page after clicking on submit
-
+    def post(self, request): # TODO: fix, empty file error returned after calling post method
         # if this is a POST request we need to process the form data
         if request.method == 'POST':
             # create a form instance and populate it with data from the request:
+            # https://docs.djangoproject.com/en/2.2/ref/forms/api/#binding-uploaded-files
             form = FileForm(request.POST, request.FILES)
             # check whether it's valid:
             if form.is_valid():
-                # process the data in form.cleaned_data as required
-                # ...
+                handle_uploaded_file(request.FILES['file'])
+                form.save()
                 # redirect to a new URL:
                 return HttpResponseRedirect('/App/index/')
-
         # if a GET (or any other method) we'll create a blank form
         else:
             form = FileForm()
-
         return render(request, 'index.html', {'form': form})
-
 
 
 class FileView(views.APIView):
@@ -91,7 +92,7 @@ class Predict(views.APIView):
 
         Example:
 
-        classtoemotion(0) = neutral
+        >>> classtoemotion(0) == neutral
 
         '''
 
@@ -119,4 +120,5 @@ class Predict(views.APIView):
         elif pred == 7:
             pred = "surprised"
             return pred
-
+        else:
+            return "Prediction out of expected range (1-7)"

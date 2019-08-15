@@ -22,8 +22,9 @@
           <div class="row">
             <div class="col-sm-4" id="FileUpload">
               <form action="/file/upload/" method="post" enctype="multipart/form-data">
-                  {{ form }}
-                 <input id="audio_file" type="file" accept="audio/*"/>
+                 {% csrf_token %}
+                 {{ form }}
+                 <input id="audio_file" type="file"/>
                  <input type="submit" value="Upload File" name="submit"/>
               </form>
             </div>
