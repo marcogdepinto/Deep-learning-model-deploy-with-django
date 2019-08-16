@@ -15,14 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf.urls import url, include
+from django.conf.urls.static import static
 from django.conf import settings
 from django.urls import path
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^App/', include('App.urls'), name="App"),
-    url(r'^file/', include('App.urls'), name="File"),
-    url(r'^predict/', include('App.urls'), name="Predict"),
 ]
 
 if settings.DEBUG:
@@ -34,3 +33,5 @@ if settings.DEBUG:
         # url(r'^__debug__/', include(debug_toolbar.urls)),
 
     ] + urlpatterns
+
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

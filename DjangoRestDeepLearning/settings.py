@@ -18,6 +18,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Url to save the user uploaded files
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+# Media url
+MEDIA_URL = '/media/'
+
 # Url to store the model
 MODEL_ROOT = os.path.join(BASE_DIR, "models")
 

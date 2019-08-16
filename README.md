@@ -10,10 +10,10 @@ This repository includes a Django-based API to serve the deep learning model pre
  
  The API has two endpoints:
  
- 1) http://127.0.0.1:8000/file/upload/
+ 1) http://127.0.0.1:8000/App/upload/
  2) http://127.0.0.1:8000/App/predict/ 
  
-Using the `file/upload` endpoint, it is possible to send a file taken from the RAVDESS dataset examples. The file will be serialized and stored in the `media` folder of the server.
+Using the `App/upload` endpoint, it is possible to send a file taken from the RAVDESS dataset examples. The file will be serialized and stored in the `media` folder of the server.
 
 ![Picture](https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/blob/master/gitmedia/fileupload.png)
  
@@ -56,6 +56,8 @@ If you do not know how Django works, you can skip to the ``App/views.py`` file t
 
 **Interface (WIP)**
 
-There will be a simple frontend to upload the files and make queries to the API. This is still work in progress. Actual mockup below:
+There will be a simple frontend to upload the files and make queries to the API at ```/App/Index``
+
+This is still work in progress: below the actual mockup.
 
  ![Picture2](https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/blob/master/gitmedia/interface.png)

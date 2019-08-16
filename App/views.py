@@ -29,13 +29,14 @@ class IndexView(TemplateView):
             form = FileForm(request.POST, request.FILES)
             # check whether it's valid:
             if form.is_valid():
-                form.save()
+                instance = form.save(commit=False)
+                instance.save()
                 # redirect to the same URL:
                 return HttpResponseRedirect('/App/index/')
         # if a GET (or any other method) we'll create a blank form
         else:
             form = FileForm()
-        return render(request, 'index.html', {'form': form})
+        return render(request, 'post_file.html', {'form': form})
 
 
 class FileView(views.APIView):
