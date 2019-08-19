@@ -19,9 +19,14 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.urls import path
 
+from App.views import UploadView, UploadSuccessView, IndexView
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^App/', include('App.urls'), name="App"),
+    url('index/', IndexView.as_view(), name='index'),
+    path('fileupload/', UploadView.as_view(), name='upload_file'),
+    url('upload_success/', UploadSuccessView.as_view(), name='upload_success'),
 ]
 
 if settings.DEBUG:
@@ -32,4 +37,3 @@ if settings.DEBUG:
     ] + urlpatterns
 
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

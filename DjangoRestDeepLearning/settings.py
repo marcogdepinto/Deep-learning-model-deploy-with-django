@@ -15,12 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Url to save the user uploaded files
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-
-# Media url
-MEDIA_URL = '/media/'
-
 # Url to store the model
 MODEL_ROOT = os.path.join(BASE_DIR, "models")
 
@@ -196,6 +190,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static")
+
+# Url to save the user uploaded files
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# Media url
+MEDIA_URL = '/media/'
 
 INTERNAL_IPS = [
     '127.0.0.1',

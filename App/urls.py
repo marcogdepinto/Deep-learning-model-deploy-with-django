@@ -6,8 +6,8 @@ app_name = 'App'
 
 urlpatterns = [
     path('index/', IndexView.as_view(), name="index"),
-    url(r'^predict/$', Predict.as_view(), name="predict"),
-    url(r'^upload/$', FileView.as_view(), name='file-upload')
+    url(r'^predict/$', Predict.as_view(), name="APIpredict"),
+    url(r'^upload/$', FileView.as_view(), name='APIupload'),
 ]
 
 

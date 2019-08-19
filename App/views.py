@@ -1,48 +1,38 @@
 import os
 import keras
 import librosa
-import logging
 import numpy as np
 import tensorflow as tf
-from .forms import FileForm
+from App.models import FileModel
 from rest_framework import views
 from django.conf import settings
 from rest_framework import status
-from django.shortcuts import render
 from App.serialize import FileSerializer
-from django.http import HttpResponseRedirect
 from rest_framework.response import Response
 from django.views.generic import TemplateView
+from django.views.generic.edit import CreateView
 from rest_framework.parsers import MultiPartParser, FormParser
 
 
 class IndexView(TemplateView):
-    template_name = "index.html"
-    log = logging.getLogger(__name__)
-    log.debug("Debug testing")
+    template_name = 'index.html'
 
-    def post(self, request): # TODO: fix, empty file error returned after calling post method
-        # if this is a POST request we need to process the form data
-        if request.method == 'POST':
-            # create a form instance and populate it with data from the request:
-            # https://docs.djangoproject.com/en/2.2/ref/forms/api/#binding-uploaded-files
-            form = FileForm(request.POST, request.FILES)
-            # check whether it's valid:
-            if form.is_valid():
-                instance = form.save(commit=False)
-                instance.save()
-                # redirect to the same URL:
-                return HttpResponseRedirect('/App/index/')
-        # if a GET (or any other method) we'll create a blank form
-        else:
-            form = FileForm()
-        return render(request, 'post_file.html', {'form': form})
+
+class UploadView(CreateView):
+    model = FileModel
+    fields = ['file']
+    template_name = 'post_file.html'
+    success_url = '/upload_success/'
+
+
+class UploadSuccessView(TemplateView):
+    template_name = 'upload_success.html'
 
 
 class FileView(views.APIView):
     parser_classes = (MultiPartParser, FormParser)
 
-    def post(self, request):
+    def upload(self, request):
         '''This method is used to Make POST requests to save a file in the media folder'''
         file_serializer = FileSerializer(data=request.data)
         if file_serializer.is_valid():
