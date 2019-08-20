@@ -36,6 +36,7 @@ class FileView(views.APIView):
         '''This method is used to Make POST requests to save a file in the media folder'''
         file_serializer = FileSerializer(data=request.data)
         if file_serializer.is_valid():
+            # TODO: implement a check to see if the file is already on the server
             file_serializer.save()
             return Response(file_serializer.data, status=status.HTTP_201_CREATED)
         else:
