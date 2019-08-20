@@ -33,7 +33,9 @@ class FileView(views.APIView):
     parser_classes = (MultiPartParser, FormParser)
 
     def upload(self, request):
-        '''This method is used to Make POST requests to save a file in the media folder'''
+        """
+        This method is used to Make POST requests to save a file in the media folder
+        """
         file_serializer = FileSerializer(data=request.data)
         if file_serializer.is_valid():
             # TODO: implement a check to see if the file is already on the server
@@ -56,7 +58,9 @@ class Predict(views.APIView):
         self.predictions = []
 
     def post(self, request):
-        '''This method is used to making predictions on audio files previously loaded with FileView.post'''
+        """
+        This method is used to making predictions on audio files previously loaded with FileView.post
+        """
         with graph.as_default():
             for entry in request.data:
                 filename = entry.pop("filename")
@@ -73,19 +77,16 @@ class Predict(views.APIView):
 
         return Response(self.predictions, status=status.HTTP_200_OK)
 
-    def classtoemotion(self, pred):
-        '''
-
+    @staticmethod
+    def classtoemotion(pred):
+        """
         This method is used to convert the predictions (int) into human readable strings.
         ::pred:: An int from 0 to 7.
         ::output:: A string label
 
         Example:
-
         >>> classtoemotion(0) == neutral
-
-        '''
-
+        """
         if pred == 0:
             pred = "neutral"
             return pred
