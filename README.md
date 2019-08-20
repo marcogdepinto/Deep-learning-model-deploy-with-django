@@ -55,6 +55,7 @@ If you do not know how Django works, you can skip to the ``App/views.py`` file t
 3) Open a terminal window, ```cd``` into the project folder and run ```python manage.py runserver```.
 
 **How to run the tests**
+
 ```python manage.py test```
 
 **Interface (WIP)**
