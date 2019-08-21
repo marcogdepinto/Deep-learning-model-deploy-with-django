@@ -77,6 +77,13 @@ class TestTemplates(TestCase):
         file_name_dir = 'App/templates/upload_success.html'
         assert os.path.isfile(file_name_dir)
 
+    def testselectfile(self):
+        """
+        Ensure a select_file_predictions template exists
+        """
+        file_name_dir = 'App/templates/select_file_predictions.html'
+        assert os.path.isfile(file_name_dir)
+
 
 class TestForm(TestCase):
 

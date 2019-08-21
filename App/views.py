@@ -3,6 +3,7 @@ import keras
 import librosa
 import numpy as np
 import tensorflow as tf
+from django.http import Http404
 from App.models import FileModel
 from rest_framework import views
 from django.conf import settings
@@ -29,8 +30,20 @@ class UploadSuccessView(TemplateView):
     template_name = 'upload_success.html'
 
 
+class SelectPredFileView(TemplateView):
+    template_name = 'select_file_predictions.html'
+    # TODO: implement this template to give the user the opportunity to select its file from the files in the server.
+
+
 class FileView(views.APIView):
     parser_classes = (MultiPartParser, FormParser)
+    queryset = FileModel.objects.all()
+
+    def get_object(self, pk):
+        try:
+            return self.queryset.get(pk=pk)
+        except FileModel.DoesNotExist:
+            raise Http404
 
     def upload(self, request):
         """
@@ -44,8 +57,11 @@ class FileView(views.APIView):
         else:
             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request):
-        raise NotImplementedError # TODO: implement
+    def delete(self, request, pk):
+        # TODO: Fix, actually throwing "delete() missing 1 required positional argument: 'pk'" error.
+        file = self.get_object(pk)
+        file.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class Predict(views.APIView):
