@@ -4,6 +4,8 @@ import librosa
 import numpy as np
 import tensorflow as tf
 from django.http import Http404
+from django.shortcuts import render_to_response
+
 from App.models import FileModel
 from rest_framework import views
 from django.conf import settings
@@ -32,7 +34,14 @@ class UploadSuccessView(TemplateView):
 
 class SelectPredFileView(TemplateView):
     template_name = 'select_file_predictions.html'
+
     # TODO: implement this template to give the user the opportunity to select its file from the files in the server.
+    # TODO: Fix it as now it is not working.
+    def listfiles(self, request):
+
+        path = settings.MEDIA_ROOT
+        file_list = os.listdir(path)
+        return render_to_response('select_file_predictions.html', {'files': file_list})
 
 
 class FileView(views.APIView):
