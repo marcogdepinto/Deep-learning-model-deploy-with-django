@@ -60,7 +60,7 @@ If you do not know how Django works, you can skip to the ``App/views.py`` file t
 
 **Interface (WIP)**
 
-There will be a simple frontend to upload the files and make queries to the API at ```/App/Index``
+There will be a simple frontend to upload the files and make queries to the API at ```/App/Index```
 
 This is still work in progress: below the actual mockup. At the moment only the file upload functionality is working.
 
