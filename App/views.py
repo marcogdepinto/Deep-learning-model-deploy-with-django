@@ -36,12 +36,10 @@ class SelectPredFileView(TemplateView):
     template_name = 'select_file_predictions.html'
 
     # TODO: implement this template to give the user the opportunity to select its file from the files in the server.
-    # TODO: Fix it as now it is not working.
-    def listfiles(self, request):
-
-        path = settings.MEDIA_ROOT
-        file_list = os.listdir(path)
-        return render_to_response('select_file_predictions.html', {'files': file_list})
+    # TODO: Fix it as now the redirect is working but no file is displayed.
+    path = settings.MEDIA_ROOT
+    file_list = os.listdir(path)
+    success_url = '/App/index/'
 
 
 class FileView(views.APIView):

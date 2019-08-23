@@ -19,14 +19,19 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.urls import path
 
-from App.views import UploadView, UploadSuccessView, IndexView
+from App.views import UploadView, UploadSuccessView, IndexView, SelectPredFileView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^App/', include('App.urls'), name="App"),
     url('index/', IndexView.as_view(), name='index'),
+
+    # Urls to upload the file and confirm the upload
     path('fileupload/', UploadView.as_view(), name='upload_file'),
     url('upload_success/', UploadSuccessView.as_view(), name='upload_success'),
+
+    # Urls to select a file for the predictions
+    path('fileselect/', SelectPredFileView.as_view(), name='file_select'),
 ]
 
 if settings.DEBUG:
