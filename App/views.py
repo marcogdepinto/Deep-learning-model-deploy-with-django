@@ -3,9 +3,6 @@ import keras
 import librosa
 import numpy as np
 import tensorflow as tf
-from django.http import Http404
-from django.shortcuts import render_to_response
-
 from App.models import FileModel
 from rest_framework import views
 from django.conf import settings
@@ -18,10 +15,16 @@ from rest_framework.parsers import MultiPartParser, FormParser
 
 
 class IndexView(TemplateView):
+    """
+    This is the index view of the website.
+    """
     template_name = 'index.html'
 
 
 class UploadView(CreateView):
+    """
+    This is the view that is used by the user of the web UI to upload a file.
+    """
     model = FileModel
     fields = ['file']
     template_name = 'post_file.html'
@@ -29,28 +32,32 @@ class UploadView(CreateView):
 
 
 class UploadSuccessView(TemplateView):
+    """
+    This is the success view of the UploadView class.
+    """
     template_name = 'upload_success.html'
 
 
 class SelectPredFileView(TemplateView):
+    """
+    This view is used to select a file from the list of files in the server.
+    """
     template_name = 'select_file_predictions.html'
 
-    # TODO: implement this template to give the user the opportunity to select its file from the files in the server.
-    # TODO: Fix it as now the redirect is working but no file is displayed.
-    path = settings.MEDIA_ROOT
-    file_list = os.listdir(path)
-    success_url = '/App/index/'
+    # TODO: implement this view to give the user the opportunity to select a file from the files in the server.
+    model = FileModel
+    fields = ['file']
+
+    # my_objects = get_list_or_404(FileModel, published=True)
 
 
 class FileView(views.APIView):
+    """
+    This class contains the method to upload and delete a file interacting directly with the API.
+    POST and DELETE request are accepted.
+    """
     parser_classes = (MultiPartParser, FormParser)
     queryset = FileModel.objects.all()
-
-    def get_object(self, pk):
-        try:
-            return self.queryset.get(pk=pk)
-        except FileModel.DoesNotExist:
-            raise Http404
 
     def upload(self, request):
         """
@@ -64,11 +71,9 @@ class FileView(views.APIView):
         else:
             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk):
-        # TODO: Fix, actually throwing "delete() missing 1 required positional argument: 'pk'" error.
-        file = self.get_object(pk)
-        file.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    def delete(self, request):
+        # TODO: Implement
+        raise NotImplementedError
 
 
 class Predict(views.APIView):
@@ -135,4 +140,4 @@ class Predict(views.APIView):
             pred = "surprised"
             return pred
         else:
-            return "Prediction out of expected range (1-7)"
+            return "Prediction out of the expected range (1-7)"

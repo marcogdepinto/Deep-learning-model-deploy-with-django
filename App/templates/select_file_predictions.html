@@ -2,9 +2,11 @@
 
 {% block content %}
 
-{% for file in files %}
-    <a href="/media/ ">{{ file }}</a>
-    <br>
-{% endfor %}
+<form method="post">
+  {% for file in fields %}
+  <input type="checkbox" name={ file } value="{ file }"><br>
+  {% endfor %}
+  <input type="submit" value="Submit">
+</form>
 
 {% endblock %}
