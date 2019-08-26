@@ -43,18 +43,21 @@ class UploadSuccessView(TemplateView):
 class SelectPredFileView(TemplateView):
     """
     This view is used to select a file from the list of files in the server.
+    After the selection, it will send the file to the server.
+    The server will return the predictions.
     """
 
     template_name = "select_file_predictions.html"
+    success_url = '/predict_success/'
 
     def get_context_data(self, **kwargs):
+        """
+        This function is used to render the list of file in the MEDIA_ROOT in the html template.
+        """
         context = super().get_context_data(**kwargs)
-
-        # List of files in the MEDIA_ROOT
         media_path = settings.MEDIA_ROOT
         myfiles = [f for f in listdir(media_path) if isfile(join(media_path, f))]
         context['myfiles'] = myfiles
-
         return context
 
 

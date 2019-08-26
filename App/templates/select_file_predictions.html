@@ -1,12 +1,12 @@
 {% extends "index.html" %}
 
 {% block content %}
-    <form method="post" enctype="multipart/form-data">
+    <form action="/App/predict/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         {% for myfile in myfiles %}
-          <input type="checkbox" name={{ myfile }} value="{{ myfile }}">{{ myfile }}<br>
+          <input type="checkbox" name="file_name" value="{{ myfile }}">{{ myfile }}<br>
         {% endfor %}
-        <button type="submit" class="btn btn-primary">Upload file</button>
+        <button type="submit" class="btn btn-primary">Predict</button>
     </form>
 {% endblock %}
