@@ -1,12 +1,12 @@
 {% extends "index.html" %}
 
 {% block content %}
-
-<form method="post">
-  {% for file in fields %}
-  <input type="checkbox" name={ file } value="{ file }"><br>
-  {% endfor %}
-  <input type="submit" value="Submit">
-</form>
-
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% for myfile in myfiles %}
+          <input type="checkbox" name={{ myfile }} value="{{ myfile }}">{{ myfile }}<br>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Upload file</button>
+    </form>
 {% endblock %}

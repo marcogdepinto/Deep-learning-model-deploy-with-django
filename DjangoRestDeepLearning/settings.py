@@ -195,11 +195,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static")
 
-# Url to save the user uploaded files
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-
-# Media url
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 INTERNAL_IPS = [
     '127.0.0.1',

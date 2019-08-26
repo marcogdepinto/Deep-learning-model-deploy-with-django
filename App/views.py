@@ -3,6 +3,8 @@ import keras
 import librosa
 import numpy as np
 import tensorflow as tf
+from os import listdir
+from os.path import isfile, join
 from App.models import FileModel
 from rest_framework import views
 from django.conf import settings
@@ -42,13 +44,26 @@ class SelectPredFileView(TemplateView):
     """
     This view is used to select a file from the list of files in the server.
     """
-    template_name = 'select_file_predictions.html'
 
-    # TODO: implement this view to give the user the opportunity to select a file from the files in the server.
-    model = FileModel
-    fields = ['file']
+    template_name = "select_file_predictions.html"
 
-    # my_objects = get_list_or_404(FileModel, published=True)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # List of files in the MEDIA_ROOT
+        media_path = settings.MEDIA_ROOT
+        myfiles = [f for f in listdir(media_path) if isfile(join(media_path, f))]
+        context['myfiles'] = myfiles
+
+        return context
+
+
+class PredictionsSuccessView(TemplateView):
+    """
+    This is the success view of the UploadView class.
+    """
+    # TODO: complete implementation and add logic
+    template_name = 'predictions.html'
 
 
 class FileView(views.APIView):
