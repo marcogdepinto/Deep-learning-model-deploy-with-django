@@ -38,7 +38,7 @@ Vary: Accept
 ]
 ```
 
-![Picture2](https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/blob/master/gitmedia/predict.png)
+![Picture2](https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/blob/master/gitmedia/predict_n.png)
 
 The model is stored in the ```models``` folder.
 
