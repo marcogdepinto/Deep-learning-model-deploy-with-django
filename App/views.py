@@ -1,10 +1,12 @@
 import os
+import json
 import keras
 import librosa
 import numpy as np
-import tensorflow as tf
 from os import listdir
+import tensorflow as tf
 from os.path import isfile, join
+from django.shortcuts import render
 from App.models import FileModel
 from rest_framework import views
 from django.conf import settings
@@ -57,15 +59,20 @@ class SelectPredFileView(TemplateView):
         context = super().get_context_data(**kwargs)
         media_path = settings.MEDIA_ROOT
         myfiles = [f for f in listdir(media_path) if isfile(join(media_path, f))]
-        context['myfiles'] = myfiles
+        context['filename'] = myfiles
         return context
+
+    def send_filename(self, request):
+        # TODO: the prediction now opens the APIView. It should instead open predictions.html.
+        filename_json = json.dumps(self.context)
+        return render(request, "select_file_prediction.html", context={'filename': filename_json})
 
 
 class PredictionsSuccessView(TemplateView):
     """
     This is the success view of the UploadView class.
     """
-    # TODO: complete implementation and add logic
+    # TODO: this view should be opened from SelectPredFileView.send-filename
     template_name = 'predictions.html'
 
 
@@ -95,6 +102,21 @@ class FileView(views.APIView):
 
 
 class Predict(views.APIView):
+    """
+    This class is used to making predictions.
+
+    Example of input:
+    {
+    "filename": "01-01-01-01-01-01-01.wav"
+    }
+
+    Example of output:
+    [
+        [
+            "neutral"
+        ]
+    ]
+    """
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         modelname = 'Emotion_Voice_Detection_Model.h5'
@@ -108,18 +130,17 @@ class Predict(views.APIView):
         This method is used to making predictions on audio files previously loaded with FileView.post
         """
         with graph.as_default():
-            for entry in request.data:
-                filename = entry.pop("filename")
-                filepath = str(os.path.join(settings.MEDIA_ROOT, filename))
-                data, sampling_rate = librosa.load(filepath)
-                try:
-                    mfccs = np.mean(librosa.feature.mfcc(y=data, sr=sampling_rate, n_mfcc=40).T, axis=0)
-                    x = np.expand_dims(mfccs, axis=2)
-                    x = np.expand_dims(x, axis=0)
-                    numpred = self.loaded_model.predict_classes(x)
-                    self.predictions.append([self.classtoemotion(numpred)])
-                except Exception as err:
-                    return Response(str(err), status=status.HTTP_400_BAD_REQUEST)
+            filename = request.data.get("filename", "01-01-01-01-01-01-01.wav")
+            filepath = str(os.path.join(settings.MEDIA_ROOT, filename))
+            data, sampling_rate = librosa.load(filepath)
+            try:
+                mfccs = np.mean(librosa.feature.mfcc(y=data, sr=sampling_rate, n_mfcc=40).T, axis=0)
+                x = np.expand_dims(mfccs, axis=2)
+                x = np.expand_dims(x, axis=0)
+                numpred = self.loaded_model.predict_classes(x)
+                self.predictions.append([self.classtoemotion(numpred)])
+            except Exception as err:
+                return Response(str(err), status=status.HTTP_400_BAD_REQUEST)
 
         return Response(self.predictions, status=status.HTTP_200_OK)
 

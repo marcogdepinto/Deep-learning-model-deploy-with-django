@@ -22,9 +22,7 @@ Using the `App/predict` endpoint, sending the filename as input in the format sh
 Example `App/predict` input:
 
 ```
-[
 {"filename" : "01-01-01-01-01-01-01.wav"}
-]
 ```
 Example `App/predict` output:
 ```

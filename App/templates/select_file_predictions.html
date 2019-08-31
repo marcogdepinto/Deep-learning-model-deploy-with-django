@@ -4,9 +4,9 @@
     <form action="/App/predict/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        {% for myfile in myfiles %}
+        {% for myfile in filename %}
           <input type="checkbox" name="file_name" value="{{ myfile }}">{{ myfile }}<br>
         {% endfor %}
-        <button type="submit" class="btn btn-primary">Predict</button>
+        <button type="submit" class="btn btn-primary" value="{{ myfile }}">Predict</button>
     </form>
 {% endblock %}

@@ -7,3 +7,4 @@ class FileSerializer(serializers.ModelSerializer):
     class Meta:
         model = FileModel
         fields = ('file', 'timestamp')
+

@@ -1,5 +1,5 @@
-from django.forms import ModelForm
 from App.models import FileModel
+from django.forms import ModelForm
 
 
 class FileForm(ModelForm):
@@ -10,4 +10,3 @@ class FileForm(ModelForm):
     class Meta:
         model = FileModel
         fields = ['file']
-
