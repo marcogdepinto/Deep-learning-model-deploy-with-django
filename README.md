@@ -14,7 +14,7 @@ This is just a research project, but hope it can inspire someone to build someth
 
 # How does this work?
 
-**Backend**
+## Backend
 
 The API has two endpoints:
  
@@ -54,7 +54,7 @@ The ```templates``` folder will contain a Bootstrap simple UI to interact with t
 
 If you do not know how Django works, you can skip to the ``App/views.py`` file to review the high level logic of the API.
 
-**Front end**
+## Front end
 
 The project includes a simple frontend to query the API, using a web interface instead of dedicated applications or tools like postman.
 
