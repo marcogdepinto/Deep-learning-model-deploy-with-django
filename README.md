@@ -5,10 +5,18 @@ Emotion Classification RAVDESS is a project that is able to predict the emotions
 More information about the project can be found in the related repository: https://github.com/marcogdepinto/Emotion-Classification-Ravdess
 
 This repository includes a Django-based API to serve the deep learning model previously trained.
+In addition, a simple front end is provided.
 
- **How does this work?**
- 
- The API has two endpoints:
+# Why I am doing this?
+
+The vision of this project is to show that artificial intelligence applications can be shipped to production, consumed by users and have a real impact.
+This is just a research project, but hope it can inspire someone to build something big :)
+
+# How does this work?
+
+**Backend**
+
+The API has two endpoints:
  
  1) http://127.0.0.1:8000/App/upload/
  2) http://127.0.0.1:8000/App/predict/ 
@@ -46,6 +54,16 @@ The ```templates``` folder will contain a Bootstrap simple UI to interact with t
 
 If you do not know how Django works, you can skip to the ``App/views.py`` file to review the high level logic of the API.
 
+**Front end**
+
+The project includes a simple frontend to query the API, using a web interface instead of dedicated applications or tools like postman.
+
+The front end is still work in progress: below the actual mockup. 
+
+![Picture2](https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/blob/master/gitmedia/interface2.png)
+
+# Developers stuff
+
 **How to start the server and try it**
 
 1) Install Django and the Django-Rest framework.
@@ -56,10 +74,8 @@ If you do not know how Django works, you can skip to the ``App/views.py`` file t
 
 ```python manage.py test```
 
-**Interface (WIP)**
+# Want to contribute?
 
-There will be a simple frontend to upload the files and make queries to the API at ```/App/Index```
-
-This is still work in progress: below the actual mockup. At the moment only the file upload functionality is working.
-
- ![Picture2](https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/blob/master/gitmedia/interface2.png)
+In the Github projects of this repository you will find the open user stories.
+If you want to debug, we always have open issues! :)
+One of the TODOs is to build a detailed contributing.md file: hope to do this soon.

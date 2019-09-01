@@ -5,12 +5,12 @@ import librosa
 import numpy as np
 from os import listdir
 import tensorflow as tf
-from os.path import isfile, join
-from django.shortcuts import render
 from App.models import FileModel
 from rest_framework import views
 from django.conf import settings
+from os.path import isfile, join
 from rest_framework import status
+from django.shortcuts import render
 from App.serialize import FileSerializer
 from rest_framework.response import Response
 from django.views.generic import TemplateView
@@ -64,6 +64,7 @@ class SelectPredFileView(TemplateView):
 
     def send_filename(self, request):
         # TODO: the prediction now opens the APIView. It should instead open predictions.html.
+        # TODO: The file passed should also be the one chosen by the user and not a fixed one.
         filename_json = json.dumps(self.context)
         return render(request, "select_file_prediction.html", context={'filename': filename_json})
 
@@ -106,16 +107,10 @@ class Predict(views.APIView):
     This class is used to making predictions.
 
     Example of input:
-    {
-    "filename": "01-01-01-01-01-01-01.wav"
-    }
+    {"filename": "01-01-01-01-01-01-01.wav"}
 
     Example of output:
-    [
-        [
-            "neutral"
-        ]
-    ]
+    [["neutral"]]
     """
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -130,7 +125,8 @@ class Predict(views.APIView):
         This method is used to making predictions on audio files previously loaded with FileView.post
         """
         with graph.as_default():
-            filename = request.data.get("filename", "01-01-01-01-01-01-01.wav")
+            # TODO: Fix the logic as filename is always catching the default value. With correct default it works.
+            filename = request.data.get("filename", "01-01-01-01-01-01-02.wav")
             filepath = str(os.path.join(settings.MEDIA_ROOT, filename))
             data, sampling_rate = librosa.load(filepath)
             try:
