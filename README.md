@@ -1,4 +1,4 @@
-# Django REST API to serve Emotion Classification RAVDESS
+# Django-rest API to serve an emotion classification deep learning model
 
 Emotion Classification RAVDESS is a project that is able to predict the emotions of a recorded speaker using a deep neural network.
 
