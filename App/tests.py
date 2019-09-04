@@ -43,8 +43,14 @@ class TestPredict(TestCase):
         """
         Ensure classtoemotion function is converting int to labels properly
         """
-        pred = 0
-        self.assertEqual(Predict.classtoemotion(pred), "neutral")
+        self.assertEqual(Predict.classtoemotion(0), "neutral")
+        self.assertEqual(Predict.classtoemotion(1), "calm")
+        self.assertEqual(Predict.classtoemotion(2), "happy")
+        self.assertEqual(Predict.classtoemotion(3), "sad")
+        self.assertEqual(Predict.classtoemotion(4), "angry")
+        self.assertEqual(Predict.classtoemotion(5), "fearful")
+        self.assertEqual(Predict.classtoemotion(6), "disgust")
+        self.assertEqual(Predict.classtoemotion(7), "surprised")
 
 
 class TestTemplates(TestCase):
