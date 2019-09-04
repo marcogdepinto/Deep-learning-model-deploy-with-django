@@ -1,5 +1,4 @@
 import os
-import json
 import keras
 import librosa
 import numpy as np
@@ -10,7 +9,6 @@ from rest_framework import views
 from django.conf import settings
 from os.path import isfile, join
 from rest_framework import status
-from django.shortcuts import render
 from App.serialize import FileSerializer
 from rest_framework.response import Response
 from django.views.generic import TemplateView
