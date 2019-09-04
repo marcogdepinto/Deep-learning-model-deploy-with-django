@@ -1,0 +1,11 @@
+Django==2.2.4
+django-debug-toolbar==2.0
+djangorestframework==3.10.2
+Keras==2.2.4
+Keras-Applications==1.0.6
+Keras-Preprocessing==1.0.5
+librosa==0.6.2
+numpy==1.16.0
+pandas==0.24.2
+pytest==4.0.1
+tensorflow==1.12.0
