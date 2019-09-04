@@ -51,6 +51,8 @@ class SelectPredFileView(TemplateView):
 
     template_name = "select_file_predictions.html"
     success_url = '/predict_success/'
+    parser_classes = FormParser
+    queryset = FileModel.objects.all()
 
     def get_context_data(self, **kwargs):
         """
@@ -61,12 +63,6 @@ class SelectPredFileView(TemplateView):
         myfiles = [f for f in listdir(media_path) if isfile(join(media_path, f))]
         context['filename'] = myfiles
         return context
-
-    def send_filename(self, request):
-        # TODO: the prediction now opens the APIView. It should instead open predictions.html.
-        # TODO: The file passed should also be the one chosen by the user and not a fixed one.
-        filename_json = json.dumps(self.context)
-        return render(request, "select_file_prediction.html", context={'filename': filename_json})
 
 
 class PredictionsSuccessView(TemplateView):
@@ -126,7 +122,7 @@ class Predict(views.APIView):
         """
         with graph.as_default():
             # TODO: Fix the logic as filename is always catching the default value. With correct default it works.
-            filename = request.data.get("filename", "01-01-01-01-01-01-02.wav")
+            filename = request.POST.getlist('file_name').pop()
             filepath = str(os.path.join(settings.MEDIA_ROOT, filename))
             data, sampling_rate = librosa.load(filepath)
             try:

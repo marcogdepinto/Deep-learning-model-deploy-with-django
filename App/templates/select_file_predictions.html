@@ -5,8 +5,8 @@
         {% csrf_token %}
         {{ form.as_p }}
         {% for myfile in filename %}
-          <input type="checkbox" name="file_name" value="{{ myfile }}">{{ myfile }}<br>
+          <input type="checkbox" name="file_name" value="{{ myfile }}" checked>{{ myfile }}<br>
         {% endfor %}
-        <button type="submit" class="btn btn-primary" value="{{ myfile }}">Predict</button>
+        <button type="submit" class="btn btn-primary">Predict</button>
     </form>
 {% endblock %}

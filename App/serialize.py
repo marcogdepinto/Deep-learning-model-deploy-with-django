@@ -8,3 +8,4 @@ class FileSerializer(serializers.ModelSerializer):
         model = FileModel
         fields = ('file', 'timestamp')
 
+
