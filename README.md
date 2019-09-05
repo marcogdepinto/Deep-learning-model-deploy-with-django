@@ -74,5 +74,6 @@ The front end is still work in progress: below the actual mockup.
 
 ```python manage.py test```
 
-**Check the user stories**
-What is the plan for the future and what is ongoing: https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/projects/2
+**User Stories**
+
+What is the plan for the future and what it is currently ongoing: https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/projects/2
