@@ -74,10 +74,5 @@ The front end is still work in progress: below the actual mockup.
 
 ```python manage.py test```
 
-# Want to contribute?
-
-In the Github projects of this repository you will find the open user stories.
-
-If you want to debug, we always have open issues! :)
-
-One of the TODOs is to build a detailed contributing.md file: hope to do this soon.
+**Check the user stories**
+What is the plan for the future and what is ongoing: https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/projects/2
