@@ -66,8 +66,8 @@ The front end is still work in progress: below the actual mockup.
 
 **How to start the server and try it**
 
-1) Install Django and the Django-Rest framework.
-2) ```git clone https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API.git```
+1) ```git clone https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API.git```
+2) ```$ pip install -r requirements.txt```
 3) Open a terminal window, ```cd``` into the project folder and run ```python manage.py runserver```.
 
 **How to run the tests**
