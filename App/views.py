@@ -48,7 +48,6 @@ class SelectPredFileView(TemplateView):
     """
 
     template_name = "select_file_predictions.html"
-    success_url = '/predict_success/'
     parser_classes = FormParser
     queryset = FileModel.objects.all()
 
@@ -61,14 +60,6 @@ class SelectPredFileView(TemplateView):
         myfiles = [f for f in listdir(media_path) if isfile(join(media_path, f))]
         context['filename'] = myfiles
         return context
-
-
-class PredictionsSuccessView(TemplateView):
-    """
-    This is the success view of the UploadView class.
-    """
-    # TODO: this view should be opened from SelectPredFileView.send-filename
-    template_name = 'predictions.html'
 
 
 class FileView(views.APIView):
@@ -119,7 +110,6 @@ class Predict(views.APIView):
         This method is used to making predictions on audio files previously loaded with FileView.post
         """
         with graph.as_default():
-            # TODO: Fix the logic as filename is always catching the default value. With correct default it works.
             filename = request.POST.getlist('file_name').pop()
             filepath = str(os.path.join(settings.MEDIA_ROOT, filename))
             data, sampling_rate = librosa.load(filepath)
