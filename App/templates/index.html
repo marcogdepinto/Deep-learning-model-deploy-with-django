@@ -17,20 +17,27 @@
         <div class="jumbotron text-center" id="myJumbotron" style="background-color:white">
           <h2>Deep Learning to predict human emotions.</h2>
         </div>
-
         <div class="container" id="Container1">
           <div class="row">
-            <div class="col-sm-4" id="FileUpload">
+            <div class="col-sm-6 text-center" id="FileUpload">
               <a href="{% url 'upload_file' %}" class="btn btn-primary">Upload your audio file</a>
             </div>
-            <div class="col-sm-4" id="makePredictions">
+            <div class="col-sm-6 text-center" id="makePredictions">
               <a href="{% url 'file_select' %}" class="btn btn-primary">Make your prediction</a>
-            </div>
-            <div class="col-sm-4" id="PredictionsOutput">
-              <h4>The emotion predicted for your file is: </h4>
             </div>
           </div>
         </div>
+         <div class="jumbotron text-center" id="myJumbotron2" style="background-color:white">
+             <div class="container" id="Container2">
+               <div class="row">
+                  <div class="col-sm-12 text-center" id="PredictionsOutput">
+                  {% for pred in predictions %}
+                    <h4>The emotion of the speaker in your file is: <strong>{{ pred }}</strong> </h4>
+                  {% endfor %}
+                  </div>
+               </div>
+             </div>
+         </div>
     </body>
-{% endblock %}
 </html>
+{% endblock %}

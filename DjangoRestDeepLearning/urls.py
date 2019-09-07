@@ -24,7 +24,7 @@ from App.views import UploadView, UploadSuccessView, IndexView, SelectPredFileVi
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^App/', include('App.urls'), name="App"),
+    url(r'^App/', include('App.urls'), name='App'),
     url('index/', IndexView.as_view(), name='index'),
 
     # Urls to upload the file and confirm the upload

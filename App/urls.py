@@ -1,11 +1,9 @@
-from django.urls import path
-from App.views import Predict, FileView, IndexView
+from App.views import Predict, FileView
 from django.conf.urls import url
 
 app_name = 'App'
 
 urlpatterns = [
-    path('index/', IndexView.as_view(), name="index"),
     url(r'^predict/$', Predict.as_view(), name="APIpredict"),
     url(r'^upload/$', FileView.as_view(), name='APIupload'),
 ]
