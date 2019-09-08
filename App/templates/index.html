@@ -19,10 +19,13 @@
         </div>
         <div class="container" id="Container1">
           <div class="row">
-            <div class="col-sm-6 text-center" id="FileUpload">
+            <div class="col-sm-4 text-center" id="FileUpload">
               <a href="{% url 'upload_file' %}" class="btn btn-primary">Upload your audio file</a>
             </div>
-            <div class="col-sm-6 text-center" id="makePredictions">
+            <div class="col-sm-4 text-center" id="FileDelete">
+              <a href="{% url 'file_delete' %}" class="btn btn-primary">Delete a file from the server</a>
+            </div>
+            <div class="col-sm-4 text-center" id="makePredictions">
               <a href="{% url 'file_select' %}" class="btn btn-primary">Make your prediction</a>
             </div>
           </div>

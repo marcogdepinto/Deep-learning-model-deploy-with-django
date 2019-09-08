@@ -20,7 +20,7 @@ from django.views.static import serve
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 
-from App.views import UploadView, UploadSuccessView, IndexView, SelectPredFileView
+from App.views import UploadView, UploadSuccessView, IndexView, SelectPredFileView, SelectFileDelView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -31,8 +31,11 @@ urlpatterns = [
     url('fileupload/', UploadView.as_view(), name='upload_file'),
     url('upload_success/', UploadSuccessView.as_view(), name='upload_success'),
 
-    # Urls to select a file for the predictions
+    # Url to select a file for the predictions
     url('fileselect/', SelectPredFileView.as_view(), name='file_select'),
+
+    # Url to select a file to be deleted
+    url('filedelete/', SelectFileDelView.as_view(), name='file_delete'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

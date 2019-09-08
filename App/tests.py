@@ -1,11 +1,16 @@
+"""
+tests.py includes all the test of the application.
+"""
+
 import os
-from App.views import Predict
+
 from django.test import TestCase
 from rest_framework.request import Request
 from rest_framework.test import APIRequestFactory
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.core.files.uploadedfile import SimpleUploadedFile
 
+from App.views import Predict
 from App.forms import FileForm
 
 
@@ -88,6 +93,13 @@ class TestTemplates(TestCase):
         Ensure a select_file_predictions template exists
         """
         file_name_dir = 'App/templates/select_file_predictions.html'
+        assert os.path.isfile(file_name_dir)
+
+    def testdeletefile(self):
+        """
+        Ensure a select_file_predictions template exists
+        """
+        file_name_dir = 'App/templates/select_file_deletion.html'
         assert os.path.isfile(file_name_dir)
 
 
