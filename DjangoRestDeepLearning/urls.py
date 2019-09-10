@@ -14,13 +14,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.conf import settings
-from django.urls import path, re_path
+from django.urls import path
+from django.urls import re_path
 from django.views.static import serve
-from django.conf.urls import url, include
+from django.conf import settings
+from django.conf.urls import url
+from django.conf.urls import include
 from django.conf.urls.static import static
 
-from App.views import UploadView, UploadSuccessView, IndexView, SelectPredFileView, SelectFileDelView
+from App.views import UploadView
+from App.views import IndexView
+from App.views import DeleteSuccessView
+from App.views import UploadSuccessView
+from App.views import SelectPredFileView
+from App.views import SelectFileDelView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -34,8 +41,9 @@ urlpatterns = [
     # Url to select a file for the predictions
     url('fileselect/', SelectPredFileView.as_view(), name='file_select'),
 
-    # Url to select a file to be deleted
+    # Url to select a file to be deleted and confirm the upload
     url('filedelete/', SelectFileDelView.as_view(), name='file_delete'),
+    url('delete_success/', DeleteSuccessView.as_view(), name='delete_success'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

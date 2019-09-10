@@ -1,5 +1,10 @@
-from App.models import FileModel
+"""
+Forms.py includes the forms to be used in the application.
+"""
+
 from django.forms import ModelForm
+
+from App.models import FileModel
 
 
 class FileForm(ModelForm):

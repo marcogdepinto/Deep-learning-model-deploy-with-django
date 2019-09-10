@@ -1,5 +1,5 @@
 """
-tests.py includes all the test of the application.
+tests.py includes all the tests of the application.
 """
 
 import os

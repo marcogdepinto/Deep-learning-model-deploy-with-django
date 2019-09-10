@@ -1,7 +1,8 @@
 {% extends "index.html" %}
 
 {% block content %}
-    <form action="/App/delete/" method="post" enctype="multipart/form-data">
+<!--Here the number 2 in "/App/delete/2/" needs to be replaced with the pk of the file. The logic is working. -->
+    <form action="/App/delete/2/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <p>Please select one file at a time from the list below to delete it from the server.</p>

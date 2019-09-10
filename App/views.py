@@ -1,6 +1,6 @@
 """
 views.py includes the main business logic of the application.
-Its role is to manage file upload, deletion and predictions.
+Its role is to manage file upload, deletion and emotion predictions.
 """
 
 import os
@@ -13,11 +13,11 @@ import librosa
 import numpy as np
 import tensorflow as tf
 from django.conf import settings
+from django.views.generic import DeleteView
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
 from rest_framework import views
 from rest_framework import status
-from rest_framework import generics
 from rest_framework.parsers import FormParser
 from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
@@ -64,7 +64,7 @@ class SelectPredFileView(TemplateView):
 
     def get_context_data(self, **kwargs):
         """
-        This function is used to render the list of file in the MEDIA_ROOT in the html template.
+        This function is used to render the list of files in the MEDIA_ROOT in the html template.
         """
         context = super().get_context_data(**kwargs)
         media_path = settings.MEDIA_ROOT
@@ -77,16 +77,15 @@ class SelectFileDelView(TemplateView):
     """
     This view is used to select a file from the list of files in the server.
     After the selection, it will send the file to the server.
-    The server will delete the file.
+    The server will then delete the file.
     """
     template_name = 'select_file_deletion.html'
-
     parser_classes = FormParser
     queryset = FileModel.objects.all()
 
     def get_context_data(self, **kwargs):
         """
-        This function is used to render the list of file in the MEDIA_ROOT in the html template.
+        This function is used to render the list of files in the MEDIA_ROOT in the html template.
         """
         context = super().get_context_data(**kwargs)
         media_path = settings.MEDIA_ROOT
@@ -114,28 +113,25 @@ class FileView(views.APIView):
             response = Response(file_serializer.data, status=status.HTTP_201_CREATED)
         else:
             response = Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
         return response
 
 
-class FileDeleteView(generics.RetrieveDestroyAPIView):
+class FileDeleteView(DeleteView):
     """
     This class contains the method to delete a file interacting directly with the API.
     DELETE requests are accepted.
     """
+    # TODO: Fix, still not working
+    template_name = 'delete_success.html'
+    model = FileModel
+    success_url = '/index/'
 
-    parser_classes = FormParser
-    queryset = FileModel.objects.all()
 
-    def post(self, request):
-        """
-        This method will be used to delete files from the server.
-        """
-        # TODO: complete, not working (error: type "object" is not iterable)
-        filename = request.POST.getlist('file_name').pop()
-        getfile = FileModel.objects.filter(name__in=filename)
-        getfile.file.delete()
-        return getfile
+class DeleteSuccessView(TemplateView):
+    """
+    This is the success view of the UploadView class.
+    """
+    template_name = 'delete_success.html'
 
 
 class Predict(views.APIView):
@@ -150,8 +146,7 @@ class Predict(views.APIView):
     """
 
     template_name = 'index.html'
-    # Removing this shows the API view to the user instead of the template.
-    renderer_classes = [TemplateHTMLRenderer]
+    renderer_classes = [TemplateHTMLRenderer]  # Removing this line shows the APIview instead of the template.
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -217,5 +212,4 @@ class Predict(views.APIView):
         for key, value in label_conversion.items():
             if int(key) == pred:
                 label = value
-
         return label

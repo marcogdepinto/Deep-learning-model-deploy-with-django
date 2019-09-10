@@ -1,3 +1,7 @@
+"""
+Models.py includes the database structure of the application.
+"""
+
 from django.db import models
 from django.conf import settings
 from django.dispatch import receiver
