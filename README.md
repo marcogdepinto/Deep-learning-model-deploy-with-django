@@ -14,53 +14,31 @@ This is just a research project, but hope it can inspire someone to build someth
 
 # How does this work?
 
-## Backend
+## User Journey
 
-The API has two endpoints:
- 
- 1) http://127.0.0.1:8000/App/upload/
- 2) http://127.0.0.1:8000/App/predict/ 
- 
-Using the `App/upload` endpoint, it is possible to send a file taken from the RAVDESS dataset examples. The file will be serialized and stored in the `media` folder of the server.
+The user journey start on the index page at ```/index/``` where it is possible to choose if 
 
-![Picture](https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/blob/master/gitmedia/fileupload.png)
- 
-Using the `App/predict` endpoint, sending the filename as input in the format shown below the API will return an array with the predictions.
+1) Upload a new file on the server;
+2) Delete a file from the server (WIP);
+3) Make a prediction on a file already on the server;
 
-Example `App/predict` input:
+![Picture1](https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/blob/master/gitmedia/index.png)
 
-```
-{"filename" : "01-01-01-01-01-01-01.wav"}
-```
-Example `App/predict` output:
-```
-HTTP 200 OK
-Allow: POST, OPTIONS
-Content-Type: application/json
-Vary: Accept
+Choosing ```Upload your audio file``` a new window will be prompted. The user will be asked to pick a file from his computer and then will be prompted with a page that will confirm that the upload has been successful.
 
-[
-    [
-        "neutral"
-    ]
-]
-```
+![Picture2](https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/blob/master/gitmedia/fileupload.png)
 
-![Picture2](https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/blob/master/gitmedia/predict_n.png)
+Choosing ```Make your prediction``` a new window will be prompted. In this window, it will be possible to see a list of the files already on the server. Following the path ```media/{filename}``` it will be also possible to listen to the audio file.
 
-The model is stored in the ```models``` folder.
+![Picture3](https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/blob/master/gitmedia/fileselect.png)
 
-The ```templates``` folder will contain a Bootstrap simple UI to interact with the API (work in progress).
+After clicking on ```Submit```, the user will be redirected to a modified home page that will include the prediction made by the Keras model for the file selected.
 
-If you do not know how Django works, you can skip to the ``App/views.py`` file to review the high level logic of the API.
+![Picture4](https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/blob/master/gitmedia/predict.png)
 
-## Front end
+# See the App in action!
 
-The project includes a simple frontend to query the API, using a web interface instead of dedicated applications or tools like postman.
-
-The front end is still work in progress: below the actual mockup. 
-
-![Picture2](https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/blob/master/gitmedia/interface2.png)
+There is a short demo of the first version on YouTube: https://youtu.be/86HhxTRL3_c
 
 # Developers stuff
 
@@ -73,6 +51,16 @@ The front end is still work in progress: below the actual mockup.
 **How to run the tests**
 
 ```python manage.py test```
+
+**Other important topics**
+
+The Keras model is stored in the ```models``` folder.
+
+```gitmedia``` folder includes the pictures used for this README.
+
+```media``` folder includes the audio files loaded using the server. 
+
+If you do not know how Django works, you can skip to the ``App/views.py`` file to review the high level logic of the API.
 
 **User Stories**
 

@@ -186,7 +186,6 @@ class Predict(views.APIView):
                 return Response({'predictions': predictions.pop()})
             except ValueError as err:
                 return Response(str(err), status=status.HTTP_400_BAD_REQUEST)
-
         return Response(predictions, status=status.HTTP_200_OK)
 
     @staticmethod
