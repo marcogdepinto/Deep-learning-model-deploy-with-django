@@ -30,7 +30,7 @@ Choosing ```Upload your audio file``` a new window will be prompted. The user wi
 
 Choosing ```Make your prediction``` a new window will be prompted. In this window, it will be possible to see a list of the files already on the server. Following the path ```media/{filename}``` it will be also possible to listen to the audio file.
 
-![Picture3](https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/blob/master/gitmedia/fileselect.png)
+![Picture3](https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/blob/master/gitmedia/fileselection.png)
 
 After clicking on ```Submit```, the user will be redirected to a modified home page that will include the prediction made by the Keras model for the file selected.
 
