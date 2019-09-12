@@ -5,10 +5,13 @@
     <form action="/App/delete/2/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <p>Please select one file at a time from the list below to delete it from the server.</p>
-        <p>The list includes the files already available on the server.</p>
+        <h5>Please select one file at a time from the list below to delete it from the server.</h5>
         {% for myfile in filename %}
-          <input type="checkbox" name="file_name" value="{{ myfile }}">{{ myfile }}<br>
+          <input type="checkbox" name="file_name" value="{{ myfile }}">
+            <label>
+                <a href="/media/{{ myfile }}">{{ myfile }}</a>
+            </label>
+            <br>
         {% endfor %}
         <br>
         <button type="submit" class="btn btn-primary">Delete</button>

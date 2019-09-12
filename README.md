@@ -24,13 +24,13 @@ The user journey start on the index page at ```/index/``` where it is possible t
 
 ![Picture1](https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/blob/master/gitmedia/index.png)
 
-Choosing ```Upload your audio file``` a new window will be prompted. The user will be asked to pick a file from his computer and then will be prompted with a page that will confirm that the upload has been successful.
+Choosing ```Upload your audio file``` the user will be redirected to a modified home page. The user will be asked to pick a file from his computer. The UI will confirm if the operation has been successful. 
 
-![Picture2](https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/blob/master/gitmedia/fileupload.png)
+![Picture2](https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/blob/master/gitmedia/fileuploadv2.png)
 
-Choosing ```Make your prediction``` a new window will be prompted. In this window, it will be possible to see a list of the files already on the server. Following the path ```media/{filename}``` it will be also possible to listen to the audio file.
+Choosing ```Make your prediction``` the user will be redirected to a modified home page. In this page, it will be possible to see a list of the files already on the server. Following the path ```media/{filename}``` it will be also possible to listen to the audio file.
 
-![Picture3](https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/blob/master/gitmedia/fileselection.png)
+![Picture3](https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/blob/master/gitmedia/fileselectionv2.png)
 
 After clicking on ```Submit```, the user will be redirected to a modified home page that will include the prediction made by the Keras model for the file selected.
 
@@ -38,7 +38,7 @@ After clicking on ```Submit```, the user will be redirected to a modified home p
 
 # See the App in action!
 
-There is a short demo of the first version on YouTube: https://youtu.be/86HhxTRL3_c
+There is a short demo of the first version on YouTube: https://youtu.be/86HhxTRL3_c . The UI has been updated since then, as now manages all the actions extending the index templates with the action templates. The above pictures are updated with the new workflow.
 
 # Developers stuff
 

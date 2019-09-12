@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 {% load static %}
-{% block content %}
 <html lang="en">
 <head>
   <title>Emotion Classification Ravdess | Django Deep Learning API</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
-  <script type="text/javascript" src="{% static 'javascript/javascript.js' %}"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script type="text/javascript" src="{% static 'javascript/javascript.js' %}"></script>
 </head>
     <body style="background-color:white">
         <div class="jumbotron text-center" id="myJumbotron" style="background-color:white">
-          <h2>Deep Learning to predict human emotions.</h2>
+            <h2><a href="/index/">Deep Learning to predict human emotions.</a></h2>
         </div>
         <div class="container" id="Container1">
           <div class="row">
@@ -41,6 +40,11 @@
                </div>
              </div>
          </div>
+         <div class="container">
+             <div class="center">
+               {% block content %}
+              {% endblock %}
+             </div>
+         </div>
     </body>
 </html>
-{% endblock %}
