@@ -102,6 +102,13 @@ class TestTemplates(TestCase):
         file_name_dir = 'App/templates/select_file_deletion.html'
         assert os.path.isfile(file_name_dir)
 
+    def testdeletesuccess(self):
+        """
+        Ensure a delete_success template exists
+        """
+        file_name_dir = 'App/templates/delete_success.html'
+        assert os.path.isfile(file_name_dir)
+
 
 class TestForm(TestCase):
 

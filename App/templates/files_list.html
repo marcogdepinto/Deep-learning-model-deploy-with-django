@@ -1,7 +1,11 @@
 {% extends "index.html" %}
 
 {% block content %}
-    <h5>
-        File deleted with success!
-    </h5>
+
+{% for file in files_list %}
+
+<p>{{ file }}</p>
+
+{%endfor%}
+
 {% endblock %}

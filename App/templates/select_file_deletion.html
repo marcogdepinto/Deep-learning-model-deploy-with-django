@@ -2,18 +2,17 @@
 
 {% block content %}
 <!--Here the number 2 in "/App/delete/2/" needs to be replaced with the pk of the file. The logic is working. -->
-    <form action="/App/delete/2/" method="post" enctype="multipart/form-data">
+    <form action="/App/delete/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <h5>Please select one file at a time from the list below to delete it from the server.</h5>
-        {% for myfile in filename %}
-          <input type="checkbox" name="file_name" value="{{ myfile }}">
-            <label>
-                <a href="/media/{{ myfile }}">{{ myfile }}</a>
-            </label>
+        {% for myfile, pk in filename %}
+            <p>Are you sure you want to delete "{{ myfile }}"?</p>
+            <input type="submit" value="Confirm">
+            <input type="hidden" name="pk" value="{{ pk }}">
             <br>
         {% endfor %}
         <br>
-        <button type="submit" class="btn btn-primary">Delete</button>
     </form>
 {% endblock %}
+

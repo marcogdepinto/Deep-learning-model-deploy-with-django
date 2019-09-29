@@ -13,11 +13,12 @@ import librosa
 import numpy as np
 import tensorflow as tf
 from django.conf import settings
-from django.views.generic import DeleteView
+from django.views.generic import ListView
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
 from rest_framework import views
 from rest_framework import status
+from rest_framework.generics import get_object_or_404
 from rest_framework.parsers import FormParser
 from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
@@ -32,6 +33,19 @@ class IndexView(TemplateView):
     This is the index view of the website.
     """
     template_name = 'index.html'
+
+
+class FilesList(ListView):
+    """
+    ListView that display companies query list.
+    :param model: Specifies the objects of which model we are listing
+    :param template_name; Specifies the static display template file.
+    :param context_object_name: Custom defined context object value,
+                     this can override default context object value.
+    """
+    model = FileModel
+    template_name = 'files_list.html'
+    context_object_name = 'files_list'
 
 
 class UploadView(CreateView):
@@ -85,13 +99,47 @@ class SelectFileDelView(TemplateView):
 
     def get_context_data(self, **kwargs):
         """
-        This function is used to render the list of files in the MEDIA_ROOT in the html template.
+        This function is used to render the list of files in the MEDIA_ROOT in the html template
+        and to get the pk (primary key) of each file.
         """
         context = super().get_context_data(**kwargs)
         media_path = settings.MEDIA_ROOT
         myfiles = [f for f in listdir(media_path) if isfile(join(media_path, f))]
-        context['filename'] = myfiles
+        pk_list = []
+        for value in myfiles:
+            pk = FileModel.objects.filter(file=value).values_list('pk', flat=True)
+            pk_list.append(pk)
+        file_and_pk = zip(myfiles, pk_list)
+        context['filename'] = file_and_pk
         return context
+
+
+class FileDeleteView(views.APIView):
+    """
+    This class contains the method to delete a file interacting directly with the API.
+    DELETE requests are accepted.
+    Removing the renderer_classes an APIView instead of a TemplateView
+    """
+    model = FileModel
+    fields = ['file']
+    template_name = 'delete_success.html'
+    success_url = '/delete_success/'
+    renderer_classes = [TemplateHTMLRenderer]
+
+    def post(self, request):
+        """
+        This method is used delete a file.
+        In the identifier variable we are storing a QuerySet object.
+        In the primary key object the id is extracted from the QuerySet string.
+        """
+        identifier = request.POST.getlist('pk').pop()
+
+        primary_key = identifier[identifier.find("[") + 1:identifier.find("]")]
+        delete_action = get_object_or_404(FileModel, pk=primary_key).delete()
+        try:
+            return Response({'pk': delete_action}, status=status.HTTP_200_OK)
+        except ValueError as err:
+            return Response(str(err), status=status.HTTP_400_BAD_REQUEST)
 
 
 class FileView(views.APIView):
@@ -116,24 +164,6 @@ class FileView(views.APIView):
         return response
 
 
-class FileDeleteView(DeleteView):
-    """
-    This class contains the method to delete a file interacting directly with the API.
-    DELETE requests are accepted.
-    """
-    # TODO: Fix, still not working
-    template_name = 'delete_success.html'
-    model = FileModel
-    success_url = '/index/'
-
-
-class DeleteSuccessView(TemplateView):
-    """
-    This is the success view of the UploadView class.
-    """
-    template_name = 'delete_success.html'
-
-
 class Predict(views.APIView):
     """
     This class is used to making predictions.
@@ -146,7 +176,8 @@ class Predict(views.APIView):
     """
 
     template_name = 'index.html'
-    renderer_classes = [TemplateHTMLRenderer]  # Removing this line shows the APIview instead of the template.
+    # Removing the line below shows the APIview instead of the template.
+    renderer_classes = [TemplateHTMLRenderer]
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

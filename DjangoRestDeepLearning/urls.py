@@ -23,11 +23,12 @@ from django.conf.urls import include
 from django.conf.urls.static import static
 
 from App.views import UploadView
+from App.views import FilesList
 from App.views import IndexView
-from App.views import DeleteSuccessView
 from App.views import UploadSuccessView
 from App.views import SelectPredFileView
 from App.views import SelectFileDelView
+from App.views import FileDeleteView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -43,7 +44,10 @@ urlpatterns = [
 
     # Url to select a file to be deleted and confirm the upload
     url('filedelete/', SelectFileDelView.as_view(), name='file_delete'),
-    url('delete_success/', DeleteSuccessView.as_view(), name='delete_success'),
+    url('delete_success/(?P<pk>\d+)/$', FileDeleteView.as_view(), name='delete_success'),
+
+    # Url to list all the files in the server
+    url('files_list/', FilesList.as_view(), name='files_list'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
