@@ -109,8 +109,15 @@ class TestTemplates(TestCase):
         file_name_dir = 'App/templates/delete_success.html'
         assert os.path.isfile(file_name_dir)
 
+    def testfileslist(self):
+        """
+        Ensure a upload_success template exists
+        """
+        file_name_dir = 'App/templates/files_list.html'
+        assert os.path.isfile(file_name_dir)
 
-class TestForm(TestCase):
+
+class TestFileUploadForm(TestCase):
 
     def testfileform(self):
         """
