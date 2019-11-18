@@ -5,11 +5,12 @@
     <form action="/App/delete/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <h5>Please select one file at a time from the list below to delete it from the server.</h5>
+        <h5>Click confirm below the filename you want to delete from the following list:</h5>
         {% for myfile, pk in filename %}
-            <p>Are you sure you want to delete "{{ myfile }}"?</p>
+            <p> - {{ myfile }}</p>
             <input type="submit" value="Confirm">
             <input type="hidden" name="pk" value="{{ pk }}">
+            <br>
             <br>
         {% endfor %}
         <br>

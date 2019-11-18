@@ -7,6 +7,7 @@ import os
 from os import listdir
 from os.path import join
 from os.path import isfile
+import requests
 
 import keras
 import librosa
@@ -31,6 +32,7 @@ from App.serialize import FileSerializer
 class IndexView(TemplateView):
     """
     This is the index view of the website.
+    :param template_name; Specifies the static display template file.
     """
     template_name = 'index.html'
 
@@ -51,6 +53,10 @@ class FilesList(ListView):
 class UploadView(CreateView):
     """
     This is the view that is used by the user of the web UI to upload a file.
+    :param model: Specifies the objects of which model we are listing
+    :param template_name; Specifies the static display template file.
+    :param fields: Specifies the model field to be used
+    :param success_url: Specifies the redirect url in case of successful upload.
     """
     model = FileModel
     fields = ['file']
@@ -61,6 +67,7 @@ class UploadView(CreateView):
 class UploadSuccessView(TemplateView):
     """
     This is the success view of the UploadView class.
+    :param template_name; Specifies the static display template file.
     """
     template_name = 'upload_success.html'
 
@@ -105,11 +112,11 @@ class SelectFileDelView(TemplateView):
         context = super().get_context_data(**kwargs)
         media_path = settings.MEDIA_ROOT
         myfiles = [f for f in listdir(media_path) if isfile(join(media_path, f))]
-        pk_list = []
+        primary_key_list = []
         for value in myfiles:
-            pk = FileModel.objects.filter(file=value).values_list('pk', flat=True)
-            pk_list.append(pk)
-        file_and_pk = zip(myfiles, pk_list)
+            primary_key = FileModel.objects.filter(file=value).values_list('pk', flat=True)
+            primary_key_list.append(primary_key)
+        file_and_pk = zip(myfiles, primary_key_list)
         context['filename'] = file_and_pk
         return context
 
@@ -133,7 +140,6 @@ class FileDeleteView(views.APIView):
         In the primary key object the id is extracted from the QuerySet string.
         """
         identifier = request.POST.getlist('pk').pop()
-
         primary_key = identifier[identifier.find("[") + 1:identifier.find("]")]
         delete_action = get_object_or_404(FileModel, pk=primary_key).delete()
         try:
@@ -150,18 +156,58 @@ class FileView(views.APIView):
     parser_classes = (MultiPartParser, FormParser)
     queryset = FileModel.objects.all()
 
-    def upload(self, request):
+    @staticmethod
+    def upload(request):
         """
         This method is used to Make POST requests to save a file in the media folder
         """
         file_serializer = FileSerializer(data=request.data)
         if file_serializer.is_valid():
-            # TODO: implement a check to see if the file is already on the server
             file_serializer.save()
             response = Response(file_serializer.data, status=status.HTTP_201_CREATED)
         else:
             response = Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return response
+
+    @staticmethod
+    def check_resource_exists(file_name):
+        """
+        This method will receive as input the file the user wants to store
+        on the server and check if a resource (an url including
+        the filename as endpoint) is existing.
+        If this function returns False, the user should not be able to save the
+        file (or at least he/she should be prompted with a message saying that
+        the file is already existing)
+        """
+        request = requests.get('/media/' + file_name)
+        check = bool(request.status_code == 200)
+        return check
+
+    @staticmethod
+    def check_file_exists(file_name):
+        """
+        This method will receive as input the file the user wants to store
+        on the server and check if a file with this name is physically in
+        the server folder.
+        If this function returns False, the user should not be able to save the
+        file (or at least he/she should be prompted with a message saying that
+        the file is already existing)
+        """
+        check = bool(str(os.path.join(settings.MEDIA_ROOT, file_name)))
+        return check
+
+    @staticmethod
+    def check_object_exists(file_name):
+        """
+        This method will receive as input the file the user wants to store
+        on the server and check if an object with that name exists in the
+        database.
+        If this function returns False, the user should not be able to save the
+        file (or at least he/she should be prompted with a message saying that
+        the file is already existing)
+        """
+        check = FileModel.objects.get(name=file_name).exists()
+        return check
 
 
 class Predict(views.APIView):
@@ -181,9 +227,9 @@ class Predict(views.APIView):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        modelname = 'Emotion_Voice_Detection_Model.h5'
+        model_name = 'Emotion_Voice_Detection_Model.h5'
         self.graph = tf.get_default_graph()
-        self.loaded_model = keras.models.load_model(os.path.join(settings.MODEL_ROOT, modelname))
+        self.loaded_model = keras.models.load_model(os.path.join(settings.MODEL_ROOT, model_name))
         self.predictions = []
 
     def file_elaboration(self, filepath):
@@ -214,10 +260,9 @@ class Predict(views.APIView):
             filepath = str(os.path.join(settings.MEDIA_ROOT, filename))
             predictions = self.file_elaboration(filepath)
             try:
-                return Response({'predictions': predictions.pop()})
+                return Response({'predictions': predictions.pop()}, status=status.HTTP_200_OK)
             except ValueError as err:
                 return Response(str(err), status=status.HTTP_400_BAD_REQUEST)
-        return Response(predictions, status=status.HTTP_200_OK)
 
     @staticmethod
     def classtoemotion(pred):
