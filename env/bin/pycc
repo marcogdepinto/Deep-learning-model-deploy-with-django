@@ -1,0 +1,3 @@
+#!/Users/marcogdepinto/PycharmProjects/DjangoRestDeepLearning/env/bin/python3
+from numba.pycc import main
+main()
