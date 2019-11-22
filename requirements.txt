@@ -1,5 +1,5 @@
 requests==2.21.0
-Django==2.2.4
+Django==2.2.7
 django-debug-toolbar==2.0
 djangorestframework==3.10.2
 Keras==2.2.4
@@ -9,5 +9,5 @@ librosa==0.6.2
 numpy==1.16.0
 pandas==0.24.2
 pytest==4.0.1
-tensorflow==1.14.0
+tensorflow==1.13.1
 psycopg2==2.8.3
