@@ -1,5 +1,7 @@
 # Deep learning model deploy with Django
 
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+
 This repository includes a Django-based API to serve a deep learning model previously trained. A simple front end is provided to give non-power users the possibility to interact via UI.
 
 The model used is an Emotion Classifier trained with audio files of the RAVDESS dataset. More info here: https://github.com/marcogdepinto/Emotion-Classification-Ravdess
