@@ -1,5 +1,5 @@
 requests==2.21.0
-Django==2.2.7
+Django==2.2.8
 django-debug-toolbar==2.0
 djangorestframework==3.10.2
 Keras==2.2.4
