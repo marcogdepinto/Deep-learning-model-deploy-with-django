@@ -9,5 +9,5 @@ librosa==0.6.2
 numpy==1.16.0
 pandas==0.24.2
 pytest==4.0.1
-tensorflow==1.13.1
+tensorflow==1.15.0
 psycopg2==2.8.3
