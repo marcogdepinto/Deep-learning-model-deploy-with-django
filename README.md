@@ -6,8 +6,6 @@ This repository includes a Django-based API to serve a deep learning model previ
 
 The model used is an Emotion Classifier trained with audio files of the RAVDESS dataset. More info here: https://github.com/marcogdepinto/Emotion-Classification-Ravdess
 
-The app is deployed on Heroku, you can try it here: https://emotion-classification-ravdess.herokuapp.com/index/ . Please note there is a bug on the DeleteFile function. 
-
 # Why I am doing this?
 
 The vision of this project is to show that artificial intelligence applications can be shipped to production, consumed by users and have a real impact.
