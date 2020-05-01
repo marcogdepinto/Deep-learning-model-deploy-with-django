@@ -13,6 +13,9 @@ class FileModel(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     path = models.FilePathField(path=settings.MEDIA_ROOT, default=settings.MEDIA_ROOT)
 
+    class Meta:	
+        unique_together = ['file', 'path']	
+
 
 @receiver(post_delete, sender=FileModel)
 def submission_delete(sender, instance, **kwargs):
