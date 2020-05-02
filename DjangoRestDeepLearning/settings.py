@@ -150,13 +150,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'django-emotion-classification',
-        'USER': 'marcogdepinto',
-        'PASSWORD': '',
+        'USER': 'marco',
+        'PASSWORD': 'test',
         'HOST': 'localhost',
         'PORT': '',
+        'OPTIONS': {'sslmode': 'disable'},
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
