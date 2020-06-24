@@ -10,7 +10,7 @@ This project is a Django-REST API that offers the consumption of a deep learning
 
 **User Journey**
 
-The user journey start on the index page at ```/index/``` where it is possible to choose if 
+The user journey starts on the index page at ```/index/``` where it is possible to choose if 
 
 1) Upload a new file on the server;
 2) Delete a file from the server (WIP);
@@ -34,15 +34,15 @@ After clicking on ```Submit```, the user will be redirected to a modified home p
 
 There is a short demo of the first version on YouTube: https://youtu.be/86HhxTRL3_c . The UI has been updated since then, as now manages all the actions extending the index templates with the action templates. The above pictures are updated with the new workflow.
 
-The current version of the application is deployed via Heroku: https://emotion-classification-ravdess.herokuapp.com/index/ . Please note the performances are not good as I am using a free tier machine.
+The current version of the application is deployed on Heroku: https://emotion-classification-ravdess.herokuapp.com/index/ . Please note the performances are not good as the machine used is a free tier.
 
 # Developers stuff
 
 **DB creation**
 
-You need PostgreSQL installed on your machine. To facilitate the configurations and if you are not familiar with PostgreSQL commands, I suggest to use a Db manager with UI: in my case, I use [pgAdmin](https://www.pgadmin.org/). 
+PostgreSQL needs to be installed. To facilitate the configuration, I suggest to use a Db manager with UI, like [pgAdmin](https://www.pgadmin.org/). 
 
-After the installation of PostgreSQL, use pgAdmin to create a ```django-emotion-classification``` database and a ```App_filemodel``` table.
+After the installation of PostgreSQL, it is possible to use pgAdmin to create a ```django-emotion-classification``` database and a ```App_filemodel``` table.
 
 The ```App_filemodel``` table can be created with the following script:
 
@@ -64,7 +64,7 @@ ALTER USER marco CREATEDB; -- This is to run the automatic tests, otherwise you 
 
 ```
 
-Please note the above script is made with the data available in my settings.py, but you can change it according to your needs.
+Please note the above script is made with the data available in the ```settings.py```, but it is possible to change it if needed.
 ```
 DATABASES = {
     'default': {
@@ -97,8 +97,8 @@ The Keras model is stored in the ```models``` folder.
 
 ```media``` folder includes the audio files loaded using the server. 
 
-If you do not know how Django works, you can skip to the ``App/views.py`` file to review the high level logic of the API.
+It is possible to have an overview of the application even without knowing how Django works by looking at the ``App/views.py`` file.
 
 **User Stories**
 
-What is the plan for the future and what it is currently ongoing: https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/projects/2
+https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/projects/2
