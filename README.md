@@ -4,7 +4,7 @@
 
 **Executive Summary**
 
-This project is a Django-REST API that offers the consumption of a deep learning model using a simple front end. The model adopted in this work is the previous version of an Emotion Classifier trained with audio files of the [RAVDESS dataset](https://zenodo.org/record/1188976#.XvO2WZMza3c). To know more, see [this repository](https://github.com/marcogdepinto/emotion-classification-from-audio-files). The final vision of this project is to show that artificial intelligence applications can be shipped to production and have a real impact.
+This project is a Django-REST API that offers the consumption of a deep learning model using a simple front end. The model adopted in this work is the previous version of an Emotion Classifier trained with audio files of the [RAVDESS dataset](https://zenodo.org/record/1188976#.XvO2WZMza3c). To know more, see [this repository](https://github.com/marcogdepinto/emotion-classification-from-audio-files). 
 
 # How does this work?
 
