@@ -2,18 +2,13 @@
 
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 
-This repository includes a Django-based API to serve a deep learning model previously trained. A simple front end is provided to give non-power users the possibility to interact via UI.
+**Executive Summary**
 
-The model used is an Emotion Classifier trained with audio files of the RAVDESS dataset. More info here: https://github.com/marcogdepinto/Emotion-Classification-Ravdess
-
-# Why I am doing this?
-
-The vision of this project is to show that artificial intelligence applications can be shipped to production, consumed by users and have a real impact.
-This is just a research project, but hope it can inspire someone to build something big :)
+This project is a Django-REST API that offers the consumption of a deep learning model using a simple front end. The model used is the previous version of the Emotion Classifier trained with audio files of the RAVDESS dataset. To know more, see ![this repository](https://github.com/marcogdepinto/emotion-classification-from-audio-files). The final vision of this project is to show that artificial intelligence applications can be shipped to production and have a real impact.
 
 # How does this work?
 
-## User Journey
+**User Journey**
 
 The user journey start on the index page at ```/index/``` where it is possible to choose if 
 
@@ -35,9 +30,11 @@ After clicking on ```Submit```, the user will be redirected to a modified home p
 
 ![Picture4](https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/blob/master/gitmedia/predict.png)
 
-# See the App in action!
+**See the App in action!**
 
 There is a short demo of the first version on YouTube: https://youtu.be/86HhxTRL3_c . The UI has been updated since then, as now manages all the actions extending the index templates with the action templates. The above pictures are updated with the new workflow.
+
+The current version of the application is deployed via Heroku: https://emotion-classification-ravdess.herokuapp.com/index/ . Please note the performances are not good as I am using a free tier machine.
 
 # Developers stuff
 
