@@ -1,7 +1,7 @@
 Django==3.0.3
 django-debug-toolbar==2.2
 django-heroku==0.3.1
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 gunicorn==20.0.4
 Keras==2.3.1
 Keras-Applications==1.0.8
