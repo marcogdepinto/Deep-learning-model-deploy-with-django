@@ -1,5 +1,5 @@
 Django==3.0.3
-django-debug-toolbar==2.2
+django-debug-toolbar==2.2.1
 django-heroku==0.3.1
 djangorestframework==3.11.0
 gunicorn==20.0.4
