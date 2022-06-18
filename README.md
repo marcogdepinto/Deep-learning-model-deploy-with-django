@@ -32,8 +32,6 @@ After clicking on ```Submit```, the user will be redirected to a modified home p
 
 **See the App in action!**
 
-There is a short demo of the first version on YouTube: https://youtu.be/86HhxTRL3_c . The UI has been updated since then, as now manages all the actions extending the index templates with the action templates. The above pictures are updated with the new workflow.
-
 The current version of the application is deployed on Heroku: https://emotion-classification-ravdess.herokuapp.com/index/ . Please note the performances are not good as the machine used is a free tier.
 
 # Developers stuff
