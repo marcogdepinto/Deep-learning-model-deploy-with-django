@@ -8,7 +8,7 @@ Keras-Applications==1.0.8
 Keras-Preprocessing==1.1.0
 librosa==0.6.3
 numba==0.49.0
-numpy==1.16.0
+numpy==1.22.0
 pandas==1.0.3
 pytest==5.4.1
 tensorflow==1.15.2
