@@ -1,2 +1,0 @@
-[build]
-command = "python manage.py collectstatic --noinput" publish = "/App/static"
