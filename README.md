@@ -30,10 +30,6 @@ After clicking on ```Submit```, the user will be redirected to a modified home p
 
 ![Picture4](https://github.com/marcogdepinto/Django-Emotion-Classification-Ravdess-API/blob/master/gitmedia/predict.png)
 
-**See the App in action!**
-
-The current version of the application is deployed on Heroku: https://emotion-classification-ravdess.herokuapp.com/index/ . Please note the performances are not good as the machine used is a free tier.
-
 # Developers stuff
 
 **DB creation**
