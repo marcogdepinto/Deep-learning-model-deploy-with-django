@@ -1,0 +1,2 @@
+ [build] 
+ command = "python manage.py collectstatic --noinput" publish = "https://github.com/marcogdepinto/Deep-learning-model-deploy-with-django/tree/master/App/static"
